@@ -1,0 +1,6 @@
+.vagrant/
+.vscode/
+.depend
+dr-doom
+*.o
+
