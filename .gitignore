@@ -3,4 +3,4 @@
 .depend
 dr-doom
 *.o
-
+*.log
