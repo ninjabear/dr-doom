@@ -4,6 +4,7 @@
 #include "cpu.h"
 #include "fork.h"
 #include "memory.h"
+#include "file_handles.h"
 
 using namespace std;
 
@@ -15,6 +16,8 @@ static const std::string VERSION("0.1.0");
 enum Mode {
     memory,
     fork_proc,
+    thread_bomb,
+    file_handles,
     cpu,
     help,
     version,
@@ -32,6 +35,8 @@ void usage() {
     cout << "  " << "dr-doom memory-cannon" << endl;
     cout << "  " << "dr-doom fork-bomb" << endl;
     cout << "  " << "dr-doom halt-catch-fire" << endl;
+    cout << "  " << "dr-doom too-many-file-handles" << endl;
+    cout << "  " << "dr-doom thread-bomb" << endl;
     cout << "  " << "dr-doom -h | --help" << endl;
     cout << "  " << "dr-doom -v | --version" << endl << endl;
     cout << "Options:" << endl;
@@ -58,6 +63,14 @@ Mode get_mode(string& str) {
 
     if (str == "halt-catch-fire") {
         return cpu;
+    }
+
+    if (str == "too-many-file-handles") {
+        return file_handles;
+    }
+
+    if (str == "thread-bomb") {
+        return thread_bomb;
     }
 
     return unknown;
@@ -100,6 +113,15 @@ int main(int argc, char **argv) {
             if (are_you_sure("This process will create a thread that runs an infinite loop for each core. Killing this process should restore normal behaviour.")) {
                 cout << endl << "Understood. Halt and catch fire mode activating." << endl << endl;
                 consume_cpu();
+            }
+            break;
+        case thread_bomb:
+            cout << "Not implemented" << endl;
+            break;
+        case file_handles:
+            if (are_you_sure("This process will open a temp file for writing using as many file handles as possible.")) {
+                cout << endl << "Understood. Opening file over and over again." << endl << endl;
+                many_open_file_handles();
             }
             break;
         case version:
