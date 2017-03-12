@@ -20,6 +20,14 @@ ensure the process is copied and each instance is not using the same page(s) of 
 
 Create threads for each parallel stream of execution (cores/HT) that your processor supports. Each loop is kept busy resulting in nearly 100% CPU usage. 
 
+### `dr-doom too-many-file-handles`
+
+Create a temporary file, and open it for reading as many times as possible. When the first error is received, no more file handles will be created. This will consume the maximum number of file handles available to the `dr-doom` process. 
+
+### `dr-doom thread-bomb`
+
+Create as many threads as possible. When the first error is received, no more threads will be created. Each thread is put in a `WAIT` (blocking) state, not a [busy loop](https://en.wikipedia.org/wiki/Busy_waiting).
+
 ### `dr-doom -h | --help`
 
 Print the help.
