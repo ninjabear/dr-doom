@@ -5,6 +5,7 @@
 #include "fork.h"
 #include "memory.h"
 #include "file_handles.h"
+#include "thread.h"
 
 using namespace std;
 
@@ -16,7 +17,7 @@ static const std::string VERSION("0.1.0");
 enum Mode {
     memory,
     fork_proc,
-    thread_bomb,
+    thread_b,
     file_handles,
     cpu,
     help,
@@ -70,7 +71,7 @@ Mode get_mode(string& str) {
     }
 
     if (str == "thread-bomb") {
-        return thread_bomb;
+        return thread_b;
     }
 
     return unknown;
@@ -115,8 +116,11 @@ int main(int argc, char **argv) {
                 consume_cpu();
             }
             break;
-        case thread_bomb:
-            cout << "Not implemented" << endl;
+        case thread_b:
+            if (are_you_sure("This process will create as many threads as it can. These threads will be zombies (consume no CPU). Killing this process should restore normal behaviour.")) {
+                cout << endl << "Understood, activating." << endl << endl; 
+                thread_bomb();
+            }
             break;
         case file_handles:
             if (are_you_sure("This process will open a temp file for writing using as many file handles as possible.")) {
