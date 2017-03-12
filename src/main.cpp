@@ -12,7 +12,7 @@ using namespace std;
 const int PROC_SUCCESS = 0;
 const int PROC_OTHER_ERROR = 1;
 
-static const std::string VERSION("0.1.0");
+static const std::string VERSION("0.2.0");
 
 enum Mode {
     memory,
