@@ -1,4 +1,4 @@
-# Dr Doom
+# Dr Doom [![Build Status](https://travis-ci.org/ninjabear/dr-doom.svg?branch=master)](https://travis-ci.org/ninjabear/dr-doom)
 
 ![Dr Doom](doom.jpg "Dr Doom comic")
 
